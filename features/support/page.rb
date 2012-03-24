@@ -95,6 +95,15 @@ class Page
   div(:div_class_index, :class => "div_class", :index => 0)
   div(:div_name_index, :name => "div_name", :index => 0)
 
+  label(:label_id, :id => 'label_id')
+  label(:label_name, :name => 'label_name')
+  label(:label_class, :class => 'label_class')
+  label(:label_text, :text => 'page-object is the best!')
+  label(:label_index, :index => 0)
+  label(:label_xpath, :xpath => '//label')
+  label(:label_class_index, :class => "label_class", :index => 0)
+  label(:label_name_index, :name => "label_name", :index => 0)
+
   span(:span_id, :id => 'span_id')
   span(:span_name, :name => 'span_name')
   span(:span_class, :class => 'span_class')

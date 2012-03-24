@@ -155,3 +155,7 @@ end
 Then /^I should have a div parent$/ do
   @parent.should be_instance_of ::PageObject::Elements::Div
 end
+
+When /^I retrieve the label element$/ do
+  @element = @page.label_id_element
+end

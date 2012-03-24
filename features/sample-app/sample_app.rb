@@ -9,7 +9,7 @@ class SampleApp
     Rack::Handler::WEBrick.run(new,
                                :Host => host,
                                :Port => port,
-                               :Logger => ::WEBrick::Log.new('/dev/null'),
+                               :Logger => ::WEBrick::Log.new('logger.txt'),
                                :AccessLog => [nil, nil],)
   end
 

@@ -73,6 +73,14 @@ module PageObject
       @platform.divs_for(identifier)
     end
 
+    def label_element(identifier={:index => 0})
+      @platform.label_for(identifier)
+    end
+
+    def label_elements(identifier={:index => 0})
+      @platform.labels_for(identifier)
+    end
+
     def span_element(identifier={:index => 0})
       @platform.span_for(identifier)
     end

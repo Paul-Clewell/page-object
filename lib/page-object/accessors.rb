@@ -56,7 +56,7 @@ module PageObject
         self.respond_to? "#{element_name}_element" and self.send("#{element_name}_element").when_present timeout
       end
     end
-    
+
     #
     # Identify an element as existing within a frame or iframe.  A frame parameter
     # is passed to the block and must be passed to the other calls to PageObject.
@@ -111,7 +111,7 @@ module PageObject
         self.send("#{name}_element").value
       end
       define_method("#{name}=") do |value|
-         return platform.text_field_value_set(identifier.clone, value) unless block_given?
+        return platform.text_field_value_set(identifier.clone, value) unless block_given?
         self.send("#{name}_element").value = value
       end
       define_method("#{name}_element") do
@@ -124,7 +124,7 @@ module PageObject
       end
       alias_method "#{name}_text_field".to_sym, "#{name}_element".to_sym
     end
-    
+
     #
     # adds three methods to the page object - one to get the text from a hidden field,
     # another to retrieve the hidden field element, and another to check the hidden
@@ -421,6 +421,42 @@ module PageObject
     end
 
     #
+    # adds three methods - one to retrieve the text from a label,
+    # another to return the label element, and another to check the label's existence.
+    #
+    # @example
+    #   label(:message, :id => 'message')
+    #   # will generate 'message', 'message_element', and 'message?' methods
+    #
+    # @param [String] the name used for the generated methods
+    # @param [Hash] identifier how we find a label.  You can use a multiple paramaters
+    #   by combining of any of the following except xpath.  The valid keys are:
+    #   * :class => Watir and Selenium
+    #   * :id => Watir and Selenium
+    #   * :index => Watir and Selenium
+    #   * :name => Watir and Selenium
+    #   * :text => Watir and Selenium
+    #   * :xpath => Watir and Selenium
+    # @param optional block to be invoked when element method is called
+    #
+    def label(name, identifier=nil, &block)
+      define_method(name) do
+        return platform.label_text_for identifier.clone unless block_given?
+        self.send("#{name}_element").text
+      end
+      define_method("#{name}_element") do
+        return call_block(&block) if block_given?
+        platform.label_for(identifier.clone)
+      end
+      define_method("#{name}?") do
+        return call_block(&block).exists? if block_given?
+        platform.label_for(identifier.clone).exists?
+      end
+      alias_method "#{name}_label".to_sym, "#{name}_element".to_sym
+    end
+
+
+    #
     # adds three methods - one to retrieve the text from a div,
     # another to return the div element, and another to check the div's existence.
     #
@@ -712,7 +748,7 @@ module PageObject
       end
       alias_method "#{name}_ordered_list".to_sym, "#{name}_element".to_sym
     end
-    
+
     #
     # adds three methods - one to retrieve the text of a h1 element, another to 
     # retrieve a h1 element, and another to check for it's existence.
@@ -746,7 +782,7 @@ module PageObject
       end
       alias_method "#{name}_h1".to_sym, "#{name}_element".to_sym
     end
-    
+
     #
     # adds three methods - one to retrieve the text of a h2 element, another
     # to retrieve a h2 element, and another to check for it's existence.
@@ -995,7 +1031,7 @@ module PageObject
       end
       define_method("#{name}?") do
         self.send("#{name}_element").exists?
-      end      
+      end
     end
 
   end

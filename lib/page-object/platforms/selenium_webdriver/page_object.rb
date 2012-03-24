@@ -446,6 +446,33 @@ module PageObject
         end
 
         #
+        # platform method to return the text for a label
+        # See PageObject::Accessors#label
+        #
+        def label_text_for(identifier)
+          process_selenium_call(identifier, Elements::Label, 'label') do |how, what|
+            @browser.find_element(how, what).text
+          end
+        end
+
+
+        #
+        # platform method to return a PageObject::Elements::Label element
+        # See PageObject::Accessors#label
+        #
+        def label_for(identifier)
+          find_selenium_element(identifier, Elements::Label, 'label')
+        end
+
+
+        #
+        # platform method to retrieve all label elements
+        #
+        def labels_for(identifier)
+          find_selenium_elements(identifier, Elements::Label, 'label')
+        end
+
+        #
         # platform method to return the text for a span
         # See PageObject::Accessors#span
         #
