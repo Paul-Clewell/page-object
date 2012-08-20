@@ -18,7 +18,15 @@
       "modal_2.html", self,
       "status:no;resizable:Yes;help:no;maximize:no;minimize:no;scrollbars:no;");
   }
+  
+  function alert_pop()
+  {
+  alert("Alert Box");
+  }
 
+  function confirm_pop() {
+  confirm("Press OK or Cancel");
+  }
 </script>
 
 </head>
@@ -34,5 +42,8 @@
 <h3>Nested modal</h3>
 <input id=launch_modal_button type=button onclick='return modal1();' value="Launch another modal"/>
 
+<h3>Alerts and Confirms</h3>
+<input id=open_alert_box type=button onclick=alert_pop() value="Show Alert Box"/>
+<input id=open_confirm_box type=button onclick=confirm_pop() value="Show Confirm Box"/>
 </body>
 </html>
